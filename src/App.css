@@ -639,3 +639,8 @@ width: 250px !important;
     height: calc(100vh - 100px); 
   }
 }
+
+
+body{
+  scroll-padding-top: 48px;
+}
