@@ -1,5 +1,9 @@
 .sticky-zh-fixed{
     bottom: env(safe-area-inset-top); 
     /* background-color: aqua !important; */
+    position: sticky !important;
+  /* top: 0 !important; */
+  background: #eeeeee;
+  padding: 8px 16px;
 }
 
