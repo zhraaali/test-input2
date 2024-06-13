@@ -9,9 +9,9 @@ import React from 'react'
 
 const StickyInput = () => {
   const [isKeyboardOpen, setIsKeyboardOpen] = useState(false);
-  const [stickyTop, setStickyTop] = useState('12%');
+  const [stickyTop, setStickyTop] = useState('0%');
   const [textareaHeight, setTextareaHeight] = useState('70px'); // Initial textarea height
-
+  const inputRef = React.createRef();
   useEffect(() => {
     const handleResize = () => {
       const screenHeight = window.innerHeight;
@@ -24,7 +24,7 @@ const StickyInput = () => {
       if (scrollTop > 500) {
         setStickyTop('0'); // Set top to 0% when scrolled past 500px
       } else {
-        setStickyTop('12%'); // Reset top to 12% otherwise
+        setStickyTop('0%'); // Reset top to 12% otherwise
       }
     };
 
@@ -39,6 +39,11 @@ const StickyInput = () => {
 
   const handleTextareaFocus = () => {
     setIsKeyboardOpen(true);
+    setTimeout(() => {
+      if (inputRef.current) {
+        inputRef.current.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      }
+    }, 0);
   };
 
   const handleTextareaBlur = () => {
@@ -67,6 +72,7 @@ const StickyInput = () => {
               // other props for your textarea
               onFocus={handleTextareaFocus}
               onBlur={handleTextareaBlur}
+              ref={inputRef}
             />
           </FloatingLabel>
 
