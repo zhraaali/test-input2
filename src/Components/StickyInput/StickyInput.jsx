@@ -64,7 +64,7 @@ const StickyInput = () => {
           backgroundColor: '#fff',
           width: '80vw',
           zIndex: '4',
-          height:'max-content'
+          // height:'max-content'
         }}
       >
         <Form style={{ display: 'flex', marginBottom: '2px', justifyContent: 'space-between' }}>
