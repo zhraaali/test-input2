@@ -9,6 +9,7 @@ import React from 'react'
 
 const StickyInput = () => {
   const [isKeyboardOpen, setIsKeyboardOpen] = useState(false);
+  const [prevIsKeyboardOpen, setPrevIsKeyboardOpen] = useState(false);
   const [stickyTop, setStickyTop] = useState('0%');
   const [textareaHeight, setTextareaHeight] = useState('70px'); 
   const inputRef = React.createRef();
@@ -18,7 +19,14 @@ const StickyInput = () => {
       const documentHeight = document.documentElement.scrollHeight;
       setIsKeyboardOpen(screenHeight < documentHeight);
     };
-
+    if (prevIsKeyboardOpen !== isKeyboardOpen) {
+      handleResize();
+      if (isKeyboardOpen) {
+        // alert('Keyboard Opened!');
+        setStickyTop('50%')
+      }
+    }
+    setPrevIsKeyboardOpen(isKeyboardOpen);
     /*const handleScroll = () => {
       const scrollTop = window.scrollY;
       if (scrollTop > 500) {
@@ -38,7 +46,7 @@ const StickyInput = () => {
       // window.addEventListener('scroll',handleResize)
 
     }; // Cleanup function
-  }, []);
+  }, [isKeyboardOpen]);
 
   const handleTextareaFocus = () => {
     setIsKeyboardOpen(true);
@@ -60,7 +68,7 @@ const StickyInput = () => {
         style={{
           position: 'fixed',
           // top: isKeyboardOpen ? '0' : stickyTop,
-          top:'0px',
+          top:stickyTop,
           backgroundColor: '#fff',
           width: '80vw',
           zIndex: '4',
