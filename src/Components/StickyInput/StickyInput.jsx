@@ -10,7 +10,7 @@ import React from 'react'
 const StickyInput = () => {
   const [isKeyboardOpen, setIsKeyboardOpen] = useState(false);
   const [prevIsKeyboardOpen, setPrevIsKeyboardOpen] = useState(false);
-  const [stickyTop, setStickyTop] = useState('0%');
+  const [stickyTop, setStickyTop] = useState('12%');
   const [textareaHeight, setTextareaHeight] = useState('70px'); 
   const inputRef = React.createRef();
   useEffect(() => {
@@ -23,16 +23,22 @@ const StickyInput = () => {
       handleResize();
       if (isKeyboardOpen) {
         // alert('Keyboard Opened!');
-        setStickyTop('50%')
+        setStickyTop('40%')
+      }else {
+        
+        setStickyTop('0%'); // Reset top to 0% when keyboard closes
       }
+      // setStickyTop('0%')
     }
+    
     setPrevIsKeyboardOpen(isKeyboardOpen);
-    /*const handleScroll = () => {
+
+   /* const handleScroll = () => {
       const scrollTop = window.scrollY;
       if (scrollTop > 500) {
         setStickyTop('0'); // Set top to 0% when scrolled past 500px
       } else {
-        setStickyTop('0%'); // Reset top to 12% otherwise
+        setStickyTop('12%'); // Reset top to 12% otherwise
       }
     };*/
 
@@ -63,10 +69,10 @@ const StickyInput = () => {
 
   return (
     <>
-      <div
+      <div 
         className='sticky-zh-fixed'
         style={{
-          position: 'fixed',
+          position: 'sticky',
           // top: isKeyboardOpen ? '0' : stickyTop,
           top:stickyTop,
           backgroundColor: '#fff',
